@@ -28,9 +28,23 @@ fetch('https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/zakladni-prehled.json
         // skupine 65+ za posledni mereny den z celkoveho pribytku
         // nakazenych za posledni mereny den
 
+        document.getElementById('js-65-podil').innerText = (parseInt(data.data[0].potvrzene_pripady_65_vcerejsi_den)/parseInt(data.data[0].potvrzene_pripady_vcerejsi_den)*100).toLocaleString('cs-CZ') + "%";
+        let datum65podil = new Date(data.data[0].potvrzene_pripady_65_vcerejsi_den_datum);
+        document.getElementById('js-65-datum').innerText = datum65podil.toLocaleDateString('cs-CZ');
+
         // UKOL NA CVICENI
         // proved validaci, zda plati podminka 
         // celkem_potvrzeni = aktivni + vyleceni + umrti
         // vysledek validace vypis do konzole pomoci console.log()
 
+        if(data.data[0].potvrzene_pripady_celkem == (data.data[0].aktivni_pripady + data.data[0].vyleceni + data.data[0].umrti) ) {
+            console.log ("vyšlo to")
+        } else {
+            console.log("nevyšlo to")
+        }
+
     });
+
+    //.catch(error) => {
+
+    
